@@ -1,0 +1,102 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+h2 {
+    margin-bottom: 25px;
+}
+
+.accordion {
+    border: 1px solid #ced4da;
+    margin-bottom: 20px;
+
+}
+
+.accordion-button {
+    padding: .5rem 1rem;
+}
+
+.animated {
+    background-color: #ced4da;
+    transition: all 0.35s ease-in-out;
+}
+
+.calc {
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.calc-2 {
+    max-width: 640px;
+}
+
+.calc-1__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.calc-2__form {
+    display: grid;
+    row-gap: 15px;
+    margin-top: 15px;
+}
+
+.calc-2__form input {
+    grid-column: 1/4;
+}
+
+.calc-2__form .btn-form {
+    grid-column: 2/4;
+}
+
+.operation {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-self: flex-end;
+}
+
+.numbers {
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    grid-row: 2/4;
+}
+
+@media (min-width: 1399.98px) {
+    .numbers {
+    max-width: 95%;
+    }
+}
+
+.numbers__item,
+.operation__item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.btn-form {
+    border: 1px solid #ced4da;
+}
+
+calc__result {
+    font-size: 1.5rem;
+}
