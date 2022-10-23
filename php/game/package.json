@@ -1,0 +1,17 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "repository": {
+    "type": "module",
+    "url": ""
+  },
+  "license": "ISC",
+  "author": "",
+  "private": "true",
+  "scripts": {},
+  "description": "",
+  "dependencies": {
+    "fireworks-canvas": "^2.6.2",
+    "fireworks-js": "^2.5.1"
+  }
+}
