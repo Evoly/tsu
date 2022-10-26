@@ -19,7 +19,7 @@
                     <tbody>
                         <?php foreach($gameTable as $val) { ?>
                             <tr>
-                                <th scope="row">1 todo</th>
+                                <th scope="row">1</th>
                                 <td><?= $val['имя'] ?></td>
                                 <td><?= $val['игры'] ?></td>
                                 <td><?= $val['победы'] ?></td>

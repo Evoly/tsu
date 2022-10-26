@@ -1,20 +1,9 @@
 import balloonAnimate from './wrongAnswer.js';
 import firework from './firework-start.js';
-            const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop2'));
-            myModal.show();
+            //const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop2'));
+            //myModal.show();
 console.log('var:', val);
 //todo onload ??
-
-
-import {
-    Fireworks
-} from './index.es.js'
-
-const container = document.querySelector('#staticBackdrop2')
-const fireworks = new Fireworks(container, {
-    /* options */ })
-fireworks.start()
-
 
 // game logic: 
 // const val will receive from html 
@@ -22,6 +11,7 @@ const word = val.toLowerCase().trim().split('');
 
 const letters = document.querySelectorAll('.js-wordLetter');
 const wordLentgh = letters.length;
+console.log('wordLength', wordLentgh);
 
 const alphabet = document.querySelectorAll('.js-letter');
 const alphabetLetter = document.querySelectorAll('.js-alphabetLetter');
@@ -38,18 +28,19 @@ alphabet.forEach(item => item.addEventListener('click', function handleClick(e) 
     const letter = item.querySelector('.js-alphabetLetter').textContent.toLowerCase();    
 
     if (word.includes(letter)) {
-        clickedLetters.push(letter);
+        
+        console.log('clickedLetters', clickedLetters);
         item.querySelector('.yes').classList.add('show');
         word.forEach((item, index) => {
             if (item === letter) {
+                clickedLetters.push(letter);
                 letters[index].textContent = letter;
             }
         });
         if (clickedLetters.length === wordLentgh) {
-            const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop2'));
+            const myModal = new bootstrap.Modal(document.getElementById('success'));
             myModal.show();
-            //firework('staticBackdrop2');
-            console.log('congratulation!');
+            firework('success');
         }
 
     } else {

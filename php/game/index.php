@@ -1,4 +1,5 @@
 <?php
+
 $conn = new mysqli("localhost", "root", "", "wordsdb");
 // $result = $conn->query("SELECT * FROM words");
 $wordObj = $conn->query("SELECT word FROM words WHERE id = 1");
@@ -6,15 +7,42 @@ $wordObj = $conn->query("SELECT word FROM words WHERE id = 1");
 $gameTable = $conn->query("SELECT * FROM gamers ORDER BY победы");
 // $gameTable = $conn->query("SELECT * FROM gamers");
 
-$word = mysqli_fetch_array($wordObj);
+//$word = mysqli_fetch_array($wordObj);
 
-$test = $word['word'];
+
+//$test = $word['word'];
 
 //check obj data
 /* foreach ($gameTable as $val) {
     print_r($val);
 } */
 
+$second_page = false;
+
+$category = [];
+
+function getWord()
+{
+    global $conn;
+    $wordObj = $conn->query("SELECT word FROM words ORDER BY RAND() LIMIT 1 ");
+    $word = mysqli_fetch_array($wordObj);
+    return $word;
+};
+
+if (isset($_POST['random'])) {
+    global $second_page;
+    $wordToHtml = getWord();
+    $test = $wordToHtml['word'];
+    $second_page = true;
+};
+
+if (isset($_POST['gameOver'])) {
+    var_dump('over', $_POST['gameOver']);
+    $val = $_POST['name'];
+    $second_page = false;
+    echo 'echovlkihnkvbjvkb';
+    var_dump('get:', $second_page, $_POST['name']);
+}
 
 
 ?>
@@ -47,60 +75,53 @@ $test = $word['word'];
                 <button class="btn btn-outline-secondary" type="submit">ok</button>
             </form>
         </div>
+        <div class="row">
+            <section class="content col">
+                <?php
+                if ($second_page) {
+                    include 'content.php';
+                    $second_page = false; //todo
+                } else {
+                    include 'start.php';
+                }
 
-        <section class="container content">
-            <div class="row  mb-3">
-                <h2 class="content__header">Тема: variable</h2>
-                <div class="col word">
-                    <script type="text/javascript">
-                        const val = "<?php echo " $test " ?>";
-                    </script>
-                    <?php
-                    $letters = mb_str_split($word['word']);
-                    foreach ($letters as $val) {
-                        echo '<span class="word-item js-wordLetter"></span>';
-                    }
-                    ?>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-12 letters">
-                    <?php
-                    $letters = 'а, б, в, г, д, е, ё, ж, з, и, й, к, л, м, н, о, п, р, с, т, у, ф, х, ц, ч, ш, щ, ъ, ы, ь, э, ю, я';
-                    $alphabet = explode(', ', $letters);
-                    foreach ($alphabet as $value) {
-                        echo
-                        '<div class="js-letter letter">
-                            <span class="js-alphabetLetter">' . $value . '</span>
-                            <span class="yes"></span>
-                            <span class="no"></span>
-                        </div>';
-                    };
-                    ?>
-                </div>
-            </div>
+                ?>
+            </section>
+            <aside class="about col-xl-3 col">
+                <?php include  'accordion.php' ?>
+            </aside>
+        </div>
 
-            <div class="row">
-                <?php include 'balloon.php' ?>
-            </div>
-        </section>
-        <aside class="about">
-            <?php include  'accordion.php' ?>
-        </aside>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle1="modal" data-bs-target1="#staticBackdrop2" id="modal">
-            Launch static backdrop modal
-        </button>
-
-        <!-- Modal -->
-        <div class="modal " id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!-- Modal success-->
+        <form method="POST" class="modal success" id="success" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Новая игра</button>
+                    <div class="modal-header">
+                        <h2>Поздравляем!</h2>
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" name="gameover">Новая игра</button>
+                    </div>
+
                 </div>
             </div>
-        </div>
+        </form>
+        <!-- Modal fail-->
+        <form method="POST" class="modal fail " id="fail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Увы, вы проиграли!</h2>
+                        <img class="modal-image" src="face-sad.svg" alt="sad person">
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" name="gameover">Новая игра</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
 
 
     </main>

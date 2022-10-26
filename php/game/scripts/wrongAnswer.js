@@ -12,8 +12,11 @@ function startAnimation(el, len) {
     setTimeout(() => {
         el.remove();
         len -= 1;
+        console.log('len=', len);
         if (len === 0) {
+            const myModal = new bootstrap.Modal(document.getElementById('fail'));
+            myModal.show();
             console.log('game over');
         }
-    }, 2000);
+    }, 1000);
 };
