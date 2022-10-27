@@ -1,23 +1,44 @@
 <?php
 
-$conn = new mysqli("localhost", "root", "", "wordsdb");
+include 'connection.php';
 // $result = $conn->query("SELECT * FROM words");
 $wordObj = $conn->query("SELECT word FROM words WHERE id = 1");
+$name = 'аноним';
 
-$gameTable = $conn->query("SELECT * FROM gamers ORDER BY победы");
-// $gameTable = $conn->query("SELECT * FROM gamers");
+function updateTable() {
+    global $conn;
+    return
+    $conn->query("SELECT * FROM gamers ORDER BY win");
+}
 
-//$word = mysqli_fetch_array($wordObj);
-
-
-//$test = $word['word'];
-
-//check obj data
-/* foreach ($gameTable as $val) {
-    print_r($val);
-} */
+$gameTable = updateTable();
 
 $second_page = false;
+
+if (isset($_GET["name"])) {
+    global $name;
+    $name = $_GET["name"];
+}
+    
+
+
+if ($name) {
+    global $gameTable;
+
+    $player = mysqli_fetch_array($conn->query("SELECT name FROM gamers WHERE name='$name' "));
+
+    if (empty($player)) {
+        $conn->query("
+            INSERT INTO gamers(name, game, win)
+            VALUES('$name', '0', '0')
+        ");
+
+        $gameTable = updateTable();
+    }
+
+}
+
+//todo del ?
 
 $category = [];
 
@@ -36,13 +57,36 @@ if (isset($_POST['random'])) {
     $second_page = true;
 };
 
-if (isset($_POST['gameOver'])) {
-    var_dump('over', $_POST['gameOver']);
-    $val = $_POST['name'];
+if (isset($_POST['gameoverS'])) {
+    global $name;
+    global $gameTable;
+    $currentPlayer = $name ?? 'аноним';
+
+    $conn->query(" 
+    UPDATE gamers SET game = game + 1, win = win + 1 WHERE name = '$currentPlayer'"); 
+    
+    $gameTable = updateTable();
+
+    $val = $_POST['name'] ?? 0;
     $second_page = false;
-    echo 'echovlkihnkvbjvkb';
-    var_dump('get:', $second_page, $_POST['name']);
+    
 }
+
+//to do current player del
+
+if (isset($_POST['gameoverFail'])) {
+    global $name;
+    global $gameTable;
+    $currentPlayer = $name ?? 'аноним';
+    echo 'currentPlayer:' .$currentPlayer;
+    
+    $conn->query(" 
+    UPDATE gamers SET game = game + 1 WHERE name = '$currentPlayer'");
+
+    $val = $_POST['name'] ?? 0;    
+    $second_page = false;
+}
+
 
 
 ?>
@@ -69,7 +113,7 @@ if (isset($_POST['gameOver'])) {
     <main class="main container" id="staticBackdrop1">
         <h1>Игра в слова</h1>
         <div class="row auth">
-            <form action="" class="col">
+            <form action="" class="col" method="GET">
                 <label for="name" class="form-label">Ваше имя?</label>
                 <input class="form-control" type="text" name='name' id="name">
                 <button class="btn btn-outline-secondary" type="submit">ok</button>
@@ -101,7 +145,7 @@ if (isset($_POST['gameOver'])) {
                         <h2>Поздравляем!</h2>
                     </div>
                     <div class="modal-body">
-                        <button type="submit" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" name="gameover">Новая игра</button>
+                        <button type="submit" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" name="gameoverS">Новая игра</button>
                     </div>
 
                 </div>
@@ -116,7 +160,7 @@ if (isset($_POST['gameOver'])) {
                         <img class="modal-image" src="face-sad.svg" alt="sad person">
                     </div>
                     <div class="modal-body">
-                        <button type="submit" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" name="gameover">Новая игра</button>
+                        <button type="submit" class="btn btn-secondary btn-lg" data-bs-dismiss="modal" name="gameoverFail">Новая игра</button>
                     </div>
 
                 </div>

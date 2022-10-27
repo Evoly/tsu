@@ -20,9 +20,9 @@
                         <?php foreach($gameTable as $val) { ?>
                             <tr>
                                 <th scope="row">1</th>
-                                <td><?= $val['имя'] ?></td>
-                                <td><?= $val['игры'] ?></td>
-                                <td><?= $val['победы'] ?></td>
+                                <td><?= $val['name'] ?></td>
+                                <td><?= $val['game'] ?></td>
+                                <td><?= $val['win'] ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

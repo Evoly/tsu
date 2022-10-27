@@ -4,6 +4,6 @@
         <button class="btn btn-lg btn-outline-secondary" type="submit" name="random">Случайная</button>
         <button class="btn btn-lg btn-outline-secondary" type="submit" name="city">Города</button>
         <button class="btn btn-lg btn-outline-secondary" type="submit" name="planet">Планеты и спутники</button>
-        <button class="btn btn-lg btn-outline-secondary" type="submit" name="plant">Растения</button>
+        <button class="btn btn-lg btn-outline-secondary" type="submit" name="country">Страны</button>
 </div>
 </form>
