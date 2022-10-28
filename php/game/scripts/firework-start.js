@@ -4,11 +4,8 @@ export default (containerId) => {
     // needs at least a container element, you can provide options
     // (options are optional, defaults defined below)
     const container = document.getElementById(containerId);
-    console.log('id:', containerId);
-    console.log('width:', container.offsetWidth, 'height:', container.offsetHeight);
     
     const width = container.offsetWidth;
-    const height = container.offsetHeight;
 
     // instantiate the class and call start
     // this returns a disposable - calling it will stop fireworks.

@@ -1,7 +1,6 @@
 import balloonAnimate from './wrongAnswer.js';
 import firework from './firework-start.js';
-            //const myModal = new bootstrap.Modal(document.getElementById('staticBackdrop2'));
-            //myModal.show();
+
 console.log('var:', val);
 //todo onload ??
 
@@ -14,10 +13,7 @@ const wordLentgh = letters.length;
 console.log('wordLength', wordLentgh);
 
 const alphabet = document.querySelectorAll('.js-letter');
-const alphabetLetter = document.querySelectorAll('.js-alphabetLetter');
 const clickedLetters = [];
-
-//const balloons = document.querySelectorAll('.balloon');
 
 alphabet.forEach(item => item.addEventListener('click', function handleClick(e) {
     if (item.classList.contains('clicked')) {
@@ -28,8 +24,6 @@ alphabet.forEach(item => item.addEventListener('click', function handleClick(e) 
     const letter = item.querySelector('.js-alphabetLetter').textContent.toLowerCase();    
 
     if (word.includes(letter)) {
-        
-        console.log('clickedLetters', clickedLetters);
         item.querySelector('.yes').classList.add('show');
         word.forEach((item, index) => {
             if (item === letter) {
@@ -50,14 +44,6 @@ alphabet.forEach(item => item.addEventListener('click', function handleClick(e) 
 
 }));
 
-//------------------------------------------
 
-/* 
-balloons.forEach(item => item.addEventListener('click', function handleClick(e) {
-    startAnimation(item);
-
-})); */
-
-
-// add fade to modal
+// todo: add fade to modal
 

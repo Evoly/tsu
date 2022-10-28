@@ -37,10 +37,6 @@ if ($name) {
 
 }
 
-//todo del ?
-
-$category = [];
-
 function getWord($category)
 {
     global $conn;
@@ -52,11 +48,6 @@ function getWord($category)
     
     $word = mysqli_fetch_array($wordObj);
     return $word;
-};
-
-$someval = 'random';
-if (isset($_POST[$someval])) {
-    echo 'post:'.$someval;
 };
 
 if (isset($_POST['random'])) {
@@ -100,11 +91,10 @@ if (isset($_POST['gameoverS'])) {
 
     $conn->query(" 
     UPDATE gamers SET game = game + 1, win = win + 1 WHERE name = '$currentPlayer'"); 
-    
-    $gameTable = updateTable();
 
     $val = $_POST['name'] ?? 0;
     $second_page = false;
+    $gameTable = updateTable();
     
 }
 
@@ -114,13 +104,14 @@ if (isset($_POST['gameoverFail'])) {
     global $name;
     global $gameTable;
     $currentPlayer = $name ?? 'аноним';
-    echo 'currentPlayer:' .$currentPlayer;
+    //echo 'currentPlayer:' .$currentPlayer;
     
     $conn->query(" 
     UPDATE gamers SET game = game + 1 WHERE name = '$currentPlayer'");
 
     $val = $_POST['name'] ?? 0;    
     $second_page = false;
+    $gameTable = updateTable();
 }
 
 
@@ -146,7 +137,7 @@ if (isset($_POST['gameoverFail'])) {
 </head>
 
 <body>
-    <main class="main container" id="staticBackdrop1">
+    <main class="main container">
         <h1>Игра в слова</h1>
         <div class="row auth">
             <form action="" class="col" method="GET">
@@ -156,19 +147,19 @@ if (isset($_POST['gameoverFail'])) {
             </form>
         </div>
         <div class="row">
-            <section class="content col">
+            <section class="content col-xl-9 col-md-12">
                 <?php
                 if ($second_page) {
-                    include 'content.php';
+                    include 'templates/content.php';
                     $second_page = false; //todo
                 } else {
-                    include 'start.php';
+                    include 'templates/start.php';
                 }
 
                 ?>
             </section>
             <aside class="about col-xl-3 col">
-                <?php include  'accordion.php' ?>
+                <?php include  'templates/accordion.php' ?>
             </aside>
         </div>
 
@@ -215,7 +206,6 @@ if (isset($_POST['gameoverFail'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script type="module" src="scripts/fireworks.js"></script>
-    <script type="module" src="scripts/index.es.js"></script>
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/wrongAnswer.js"></script>
     <script type="module" src="scripts/firework-start.js"></script>

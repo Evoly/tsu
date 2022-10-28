@@ -17,14 +17,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($gameTable as $val) { ?>
+                        <?php
+                        $counter = 1;
+                        foreach ($gameTable as $val) {  ?>
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row"> <?= $counter ?></th>
                                 <td><?= $val['name'] ?></td>
                                 <td><?= $val['game'] ?></td>
                                 <td><?= $val['win'] ?></td>
                             </tr>
-                        <?php } ?>
+                        <?php $counter++;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -33,24 +36,18 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                Accordion Item #2
+                О проекте:
             </button>
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
             <div class="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                Accordion Item #3
-            </button>
-        </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-            <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <ul>
+                    <li>Прототип игры <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D1%81%D0%B5%D0%BB%D0%B8%D1%86%D0%B0_(%D0%B8%D0%B3%D1%80%D0%B0)">виселица</a>; </li>
+                    <li>цели: научиться делать запрос к БД и обрабатывать ответ;</li>
+                    <li>возможно не работает на тач устройствах;</li>
+                    <li>правильный ответ можно посмотреть в консоли</li>
+                    <li>прогресс анонимных игроков добавляется к игроку "аноним" </li>
+                </ul>
             </div>
         </div>
     </div>

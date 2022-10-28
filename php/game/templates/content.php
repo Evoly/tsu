@@ -1,5 +1,9 @@
 <div class="row  mb-3">
-    <h2 class="content__header">Тема: <?php echo $theme ?> </h2>
+    <div class="content__header">
+        <div class="content__player"> Игрок: <?= mb_convert_case($name, MB_CASE_TITLE, "UTF-8") ?></div>
+        <h2>Тема: <?php echo $theme ?> </h2>
+    </div>
+
     <div class="col word">
         <script type="text/javascript">
             const val = "<?php echo " $test " ?>";
@@ -30,5 +34,5 @@
 </div>
 
 <div class="row">
-    <?php include 'balloon.php' ?>
+    <?php include 'templates/balloon.php' ?>
 </div>

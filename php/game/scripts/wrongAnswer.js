@@ -18,5 +18,5 @@ function startAnimation(el, len) {
             myModal.show();
             console.log('game over');
         }
-    }, 1000);
+    }, 500);
 };
