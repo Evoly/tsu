@@ -4,11 +4,12 @@ include 'connection.php';
 // $result = $conn->query("SELECT * FROM words");
 $wordObj = $conn->query("SELECT word FROM words WHERE id = 1");
 $name = 'аноним';
+$theme = 'Случайная';
 
 function updateTable() {
     global $conn;
     return
-    $conn->query("SELECT * FROM gamers ORDER BY win");
+    $conn->query("SELECT * FROM gamers ORDER BY win DESC");
 }
 
 $gameTable = updateTable();
@@ -19,8 +20,6 @@ if (isset($_GET["name"])) {
     global $name;
     $name = $_GET["name"];
 }
-    
-
 
 if ($name) {
     global $gameTable;
@@ -42,18 +41,55 @@ if ($name) {
 
 $category = [];
 
-function getWord()
+function getWord($category)
 {
     global $conn;
-    $wordObj = $conn->query("SELECT word FROM words ORDER BY RAND() LIMIT 1 ");
+    if ($category === 'random') {
+        $wordObj = $conn->query("SELECT word FROM words ORDER BY RAND() LIMIT 1 ");
+    }else {
+        $wordObj = $conn->query("SELECT word FROM words WHERE category='$category' ORDER BY RAND() LIMIT 1 ");
+    }
+    
     $word = mysqli_fetch_array($wordObj);
     return $word;
 };
 
+$someval = 'random';
+if (isset($_POST[$someval])) {
+    echo 'post:'.$someval;
+};
+
 if (isset($_POST['random'])) {
     global $second_page;
-    $wordToHtml = getWord();
+    $wordToHtml = getWord('random');
     $test = $wordToHtml['word'];
+    $second_page = true;
+};
+
+if (isset($_POST['city'])) {
+    global $theme;
+    global $second_page;
+    $wordToHtml = getWord('город');
+    $test = $wordToHtml['word'];
+    $theme = 'Города';
+    $second_page = true;
+};
+
+if (isset($_POST['planet'])) {
+    global $theme;
+    global $second_page;
+    $wordToHtml = getWord('планета');
+    $test = $wordToHtml['word'];
+    $theme = 'Планеты и спутники';
+    $second_page = true;
+};
+
+if (isset($_POST['country'])) {
+    global $theme;
+    global $second_page;
+    $wordToHtml = getWord('страна');
+    $test = $wordToHtml['word'];
+    $theme = 'Страны';
     $second_page = true;
 };
 

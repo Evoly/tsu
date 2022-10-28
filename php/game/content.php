@@ -1,5 +1,5 @@
 <div class="row  mb-3">
-    <h2 class="content__header">Тема: variable</h2>
+    <h2 class="content__header">Тема: <?php echo $theme ?> </h2>
     <div class="col word">
         <script type="text/javascript">
             const val = "<?php echo " $test " ?>";
